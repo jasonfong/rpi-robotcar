@@ -14,8 +14,8 @@ class Motion:
     def int_to_motor_speed(self, speed):
         if speed < 0:
             cleaned_speed = 0 
-        elif speed > 4095:
-            cleaned_speed = 4095
+        elif speed > 100:
+            cleaned_speed = 100
         else:
             cleaned_speed= speed
         return 4095 * cleaned_speed / 100 
@@ -27,23 +27,26 @@ class Motion:
         self.driver.setOff(self.pwm_3)
         self.driver.setPWM(self.pwm_4, motor_speed)
 
-    def backward(self):
+    def backward(self, speed):
+        motor_speed = self.int_to_motor_speed(speed)
         self.driver.setOff(self.pwm_1)
-        self.driver.setPWM(self.pwm_2, 2048)
+        self.driver.setPWM(self.pwm_2, motor_speed)
         self.driver.setOn(self.pwm_3)
-        self.driver.setPWM(self.pwm_4, 2048)
+        self.driver.setPWM(self.pwm_4, motor_speed)
 
-    def left(self):
+    def left(self, speed):
+        motor_speed = self.int_to_motor_speed(speed)
         self.driver.setOn(self.pwm_1)
-        self.driver.setPWM(self.pwm_2, 2048)
+        self.driver.setPWM(self.pwm_2, motor_speed)
         self.driver.setOn(self.pwm_3)
-        self.driver.setPWM(self.pwm_4, 2048)
+        self.driver.setPWM(self.pwm_4, motor_speed)
 
-    def right(self):
+    def right(self, speed):
+        motor_speed = self.int_to_motor_speed(speed)
         self.driver.setOff(self.pwm_1)
-        self.driver.setPWM(self.pwm_2, 2048)
+        self.driver.setPWM(self.pwm_2, motor_speed)
         self.driver.setOff(self.pwm_3)
-        self.driver.setPWM(self.pwm_4, 2048)
+        self.driver.setPWM(self.pwm_4, motor_speed)
 
     def stop(self):
         self.driver.setPWM(self.pwm_2, 0)
