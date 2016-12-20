@@ -1,0 +1,38 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+function send_direction(direction, speed) {
+    $.ajax({
+        url: "/" + direction,
+        type: "GET",
+        data: {
+            "speed": speed
+        }
+    })
+}
+function forward_js() {
+    send_direction("forward", $('#speed').val())
+}
+function backward_js() {
+    send_direction("backward", $('#speed').val())
+}
+function left_js() {
+    send_direction("left", $('#speed').val())
+}
+function right_js() {
+    send_direction("right", $('#speed').val())
+}
+</script>
+</head>
+<body>
+<h2>Yes, Master. What is your command?</h2>
+Speed: <input id="speed">
+<ul>
+<li><button onclick="forward_js();">Forward</button></li>
+<li><button onclick="backward_js();">Backward</button></li>
+<li><button onclick="left_js();">Left</button></li>
+<li><button onclick="right_js();">Right</button></li>
+</ul>
+</body>
+</html>
